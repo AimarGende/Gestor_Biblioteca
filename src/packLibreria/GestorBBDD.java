@@ -12,6 +12,7 @@ public class GestorBBDD extends Conector{
 		pt.setString(1, libro.getTitulo());
 		pt.setString(2,libro.getAutor());
 		pt.setInt(3, libro.getNum_pag());
+		pt.execute();
 		cerrar();
 	}
 	
@@ -19,6 +20,7 @@ public class GestorBBDD extends Conector{
 		conectar();
 		pt = getCon().prepareStatement("DELETE FROM libros WHERE id=?");
 		pt.setInt(1, id);
+		pt.execute();
 		cerrar();
 
 	}
