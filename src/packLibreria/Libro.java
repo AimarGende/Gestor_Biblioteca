@@ -48,6 +48,11 @@ public class Libro {
 	public void setNum_pag(int num_pag) {
 		this.num_pag = num_pag;
 	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", num_pag=" + num_pag + "]";
+	}
 	
 	
 }
