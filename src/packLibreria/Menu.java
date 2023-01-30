@@ -1,11 +1,13 @@
 package packLibreria;
 
 public class Menu {
+	
 	static void mostrarMenuPrincipal() {
 		System.out.println("--MENU PRINCIPAL--");
 		System.out.println("1. Gestionar Libros");
 		System.out.println("2. Gestionar Socios");
 		System.out.println("3. Gestionar Prestamos");
+		System.out.println("0. Salir");
 		System.out.println("Escoja una opcion:");
 	}
 
@@ -14,6 +16,7 @@ public class Menu {
 		System.out.println("1. Insertar Libro");
 		System.out.println("2. Eliminar Libro");
 		System.out.println("3. Ver libros");
+		System.out.println("0. Salir");
 		System.out.println("Escoja una opcion:");
 	}
 
