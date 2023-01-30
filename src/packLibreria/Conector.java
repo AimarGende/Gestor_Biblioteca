@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class Conector {
-	Connection con;
+	private Connection con;
 	
 	public void  conectar() throws ClassNotFoundException, SQLException {
 		System.out.println("Conectando");
