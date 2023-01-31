@@ -16,7 +16,7 @@ public class GestorLibros {
 				case Menu.INSERTAR_LIBRO:
 					System.out.println("Ha escogido insertar libro");
 					
-					libro=FormulariosDeDatos.pedirDatos(sc);
+					libro=FormulariosDeDatos.pedirDatosLibro(sc);
 					gest.conectar();
 					gest.insertarLibro(libro);
 					gest.cerrar();
@@ -28,6 +28,7 @@ public class GestorLibros {
 					gest.conectar();
 					gest.eliminarLibro(id);
 					gest.cerrar();
+					
 					break;
 				case Menu.MODIFICAR_LIBRO:
 					System.out.println("Ha escogido modificar libro");
