@@ -11,7 +11,7 @@ public class GestorSocios {
 		Socios socio=new Socios();
 		GestorBBDD gest=new GestorBBDD();
 		do {
-			Menu.mostrarMenuLibros();
+			Menu.mostrarMenuSocios();
 			opcion=Integer.parseInt(sc.nextLine());
 			switch (opcion){
 				case Menu.INSERTAR_SOCIO:
