@@ -6,23 +6,25 @@ import java.sql.SQLException;
 
 public class GestorBBDD extends Conector{
 	PreparedStatement pt;
+	 
+	public GestorBBDD() {
+	}
+
 	public void insertarLibro(Libro libro) throws ClassNotFoundException, SQLException {
-		conectar();
+		
 		pt = getCon().prepareStatement("INSERT INTO libros (titulo, autor, num_pag) VALUES (?,?,?)");
 		pt.setString(1, libro.getTitulo());
 		pt.setString(2,libro.getAutor());
 		pt.setInt(3, libro.getNum_pag());
 		pt.execute();
-		cerrar();
+	
 	}
 	
 	public void eliminarLibro(int id) throws ClassNotFoundException, SQLException {
-		conectar();
 		pt = getCon().prepareStatement("DELETE FROM libros WHERE id=?");
 		pt.setInt(1, id);
 		pt.execute();
-		cerrar();
-
+	
 	}
 	
 	public Libro getLibro(int id) throws SQLException {
