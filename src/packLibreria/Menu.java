@@ -10,8 +10,11 @@ public class Menu {
 	final static int MODIFICAR_LIBRO=3;
 	final static int VER_LIBROS=4;
 
+	final static int INSERTAR_SOCIO=1;
+	final static int ELIMINAR_SOCIO=2;
+	final static int MODIFICAR_SOCIO=3;
+	final static int VER_SOCIOS=4;
 	
-	final static int VER_SOCIOS=1;
 	
 	final static int REALIZAR_PRESTAMO=1;
 	
@@ -36,9 +39,13 @@ public class Menu {
 	}
 
 	static void mostrarMenuSocios() {
-		System.out.println("--MENU SOCIOS--");
-		System.out.println(VER_SOCIOS+". Ver Socios");
-
+		System.out.println("--MENU LIBROS--");
+		System.out.println(INSERTAR_SOCIO+". Insertar Libro");
+		System.out.println(ELIMINAR_SOCIO+". Eliminar Libro");
+		System.out.println(MODIFICAR_SOCIO+". Modificar libro");
+		System.out.println(VER_SOCIOS+". Ver libros");
+		System.out.println(SALIR+". Salir");
+		System.out.println("Escoja una opcion:");
 	}
 
 	static void mostrarMenuPrestamos() {
