@@ -47,7 +47,7 @@ public class GestorBBDD extends Conector{
 		pt=getCon().prepareStatement(select);
 		pt.setInt(1, id);
 		ResultSet result=pt.executeQuery();
-		
+		result.next();
 		libro.setId(result.getInt("id"));
 		libro.setTitulo(result.getString("titulo"));
 		libro.setAutor(result.getString("autor"));
@@ -103,6 +103,7 @@ public class GestorBBDD extends Conector{
 		pt.setString(4, socio.getPoblacion());
 		pt.setString(5, socio.getProvincia());
 		pt.setString(6, socio.getDni());
+		pt.setInt(7, id);
 		pt.executeUpdate();
 		System.out.println("Se ha actualizado el socio");
 	}
@@ -114,7 +115,8 @@ public class GestorBBDD extends Conector{
 		pt=getCon().prepareStatement(select);
 		pt.setInt(1, id);
 		ResultSet result=pt.executeQuery();
-		
+		result.next();
+		socio.setId(result.getInt("id"));
 		socio.setNombre(result.getString("nombre"));
 		socio.setApellido(result.getString("apellido"));
 		socio.setDireccion(result.getString("direccion"));
@@ -135,6 +137,7 @@ public class GestorBBDD extends Conector{
 		ResultSet result=pt.executeQuery();
 		while(result.next()) {
 			Socios socio=new Socios();
+			socio.setId(result.getInt("id"));
 			socio.setNombre(result.getString("nombre"));
 			socio.setApellido(result.getString("apellido"));
 			socio.setDireccion(result.getString("direccion"));
