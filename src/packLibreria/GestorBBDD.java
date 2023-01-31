@@ -18,13 +18,15 @@ public class GestorBBDD extends Conector{
 		pt.setString(2,libro.getAutor());
 		pt.setInt(3, libro.getNum_pag());
 		pt.execute();
-	
+		System.out.println("Se ha insertado el libro");
 	}
 	
 	public void eliminarLibro(int id) throws ClassNotFoundException, SQLException {
 		pt = getCon().prepareStatement("DELETE FROM libros WHERE id=?");
 		pt.setInt(1, id);
 		pt.execute();
+		
+		System.out.println("Se ha eliminado el libro");
 	
 	}
 	
@@ -35,6 +37,7 @@ public class GestorBBDD extends Conector{
 		pt.setInt(3, libro.getNum_pag());
 		pt.setInt(4, id);
 		pt.executeUpdate();
+		System.out.println("Se ha actualizado el libro");
 	}
 	
 	public Libro getLibro(int id) throws SQLException {
@@ -82,14 +85,14 @@ public class GestorBBDD extends Conector{
 		pt.setString(5, socio.getProvincia());
 		pt.setString(6, socio.getDni());
 		pt.execute();
-	
+		System.out.println("Se ha insertado el socio");
 	}
 	
 	public void eliminarSocio(int id) throws ClassNotFoundException, SQLException {
 		pt = getCon().prepareStatement("DELETE FROM socios WHERE id=?");
 		pt.setInt(1, id);
 		pt.execute();
-	
+		System.out.println("Se ha eliminado el socio");
 	}
 	
 	public void modificarSocio(Socios socio,int id, Scanner sc) throws SQLException {
@@ -101,6 +104,7 @@ public class GestorBBDD extends Conector{
 		pt.setString(5, socio.getProvincia());
 		pt.setString(6, socio.getDni());
 		pt.executeUpdate();
+		System.out.println("Se ha actualizado el socio");
 	}
 	
 	public Socios getSocio(int id) throws SQLException {
