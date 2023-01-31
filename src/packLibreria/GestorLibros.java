@@ -9,21 +9,25 @@ public class GestorLibros {
 			Menu.mostrarMenuLibros();
 			opcion=Integer.parseInt(sc.nextLine());
 			switch (opcion){
-				case 1:
+				case Menu.INSERTAR_LIBRO:
 					System.out.println("Ha escogido insertar libro");
 					break;
-				case 2:
+				case Menu.ELIMINAR_LIBRO:
 					System.out.println("Ha escogido eliminar libro");
 					break;
-				case 3:
+				case Menu.MODIFICAR_LIBRO:
+					System.out.println("Ha escogido modificar libro");
+					break;
+				case Menu.VER_LIBROS:
 					System.out.println("Ha escogido ver libros");
 					break;
-				case 0:
+				case Menu.SALIR:
+					System.out.println("Saliendo del menu...");
 					break;
 				default:
 					System.out.println("Opcion equivocada");
 					break;
 			}
-		}while(opcion!=0);
+		}while(opcion!=Menu.SALIR);
 	}
 }
