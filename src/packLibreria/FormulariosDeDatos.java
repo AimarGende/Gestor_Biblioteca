@@ -35,4 +35,6 @@ public class FormulariosDeDatos {
 		id=Integer.parseInt(sc.nextLine());
 		return id;
 	}
+	
+//hacer seccion para socios
 }
