@@ -13,7 +13,19 @@ public class Visor {
 		System.out.println(libro.toString());
 	}
 	
+	static void mostrarSocios(ArrayList<Socios> socioList) {
+		for (Socios socio: socioList) {
+			System.out.println(socio.toString());
+		}
+	}
+	
+	static void mostrarSocio(Socios socio) {
+		System.out.println(socio.toString());
+	}
+	
 	static void mostrarMensaje(String mensaje) {
 		System.out.println(mensaje);
 	}
+	
+	
 }
