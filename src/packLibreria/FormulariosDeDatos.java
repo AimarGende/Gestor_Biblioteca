@@ -25,11 +25,14 @@ public class FormulariosDeDatos {
 		libro.setAutor(sc.nextLine());
 		System.out.println("Inserte el nuevo numero de paginas del libro");
 		libro.setNum_pag(Integer.parseInt(sc.nextLine()));
-		System.out.println("Ha insertado los datos, muchas gracias.");
+		System.out.println("Ha actualizado los datos, muchas gracias.");
 		return libro;
 	}
 	
 	static int pedirIdLibro(Scanner sc) {
-		return 0;
+		int id=0;
+		System.out.println("Inserte la id del libro");
+		id=Integer.parseInt(sc.nextLine());
+		return id;
 	}
 }
