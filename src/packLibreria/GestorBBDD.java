@@ -10,7 +10,7 @@ public class GestorBBDD extends Conector{
 	PreparedStatement pt;
 	public GestorBBDD() {
 	}
-
+//Para GestorLibros---------------------------------------------------------------------------------------------
 	public void insertarLibro(Libro libro) throws ClassNotFoundException, SQLException {
 		
 		pt = getCon().prepareStatement("INSERT INTO libros (titulo, autor, num_pag) VALUES (?,?,?)");
@@ -70,5 +70,76 @@ public class GestorBBDD extends Conector{
 			libroList.add(libro);
 		}
 		return libroList;
+	}
+//Para GestorSocios---------------------------------------------------------------------------------
+	public void insertarSocio(Socios socio) throws ClassNotFoundException, SQLException {
+		
+		pt = getCon().prepareStatement("INSERT INTO socios (nombre, apellido, direccion, poblacion, provincia, dni) VALUES (?,?,?,?,?,?)");
+		pt.setString(1, socio.getNombre());
+		pt.setString(2, socio.getApellido());
+		pt.setString(3, socio.getDireccion());
+		pt.setString(4, socio.getPoblacion());
+		pt.setString(5, socio.getProvincia());
+		pt.setString(6, socio.getDni());
+		pt.execute();
+	
+	}
+	
+	public void eliminarSocio(int id) throws ClassNotFoundException, SQLException {
+		pt = getCon().prepareStatement("DELETE FROM socios WHERE id=?");
+		pt.setInt(1, id);
+		pt.execute();
+	
+	}
+	
+	public void modificarSocio(Socios socio,int id, Scanner sc) throws SQLException {
+		pt=getCon().prepareStatement("UPDATE socios SET nombre=?, apellido=?, direccion=?, poblacion=?, provincia=?, dni=? WHERE id=?");
+		pt.setString(1, socio.getNombre());
+		pt.setString(2, socio.getApellido());
+		pt.setString(3, socio.getDireccion());
+		pt.setString(4, socio.getPoblacion());
+		pt.setString(5, socio.getProvincia());
+		pt.setString(6, socio.getDni());
+		pt.executeUpdate();
+	}
+	
+	public Socios getSocio(int id) throws SQLException {
+		String select="SELECT * FROM socios WHERE id=?";
+		Socios socio=new Socios();
+		
+		pt=getCon().prepareStatement(select);
+		pt.setInt(1, id);
+		ResultSet result=pt.executeQuery();
+		
+		socio.setNombre(result.getString("nombre"));
+		socio.setApellido(result.getString("apellido"));
+		socio.setDireccion(result.getString("direccion"));
+		socio.setPoblacion(result.getString("poblacion"));
+		socio.setProvincia(result.getString("provincia"));
+		socio.setDni(result.getString("dni"));
+		
+		return socio;
+	}
+	
+	public ArrayList<Socios> getSocios() throws SQLException{
+		ArrayList<Socios> socioList=new ArrayList<Socios>();
+		String select="SELECT * FROM socios";
+		
+		
+		pt=getCon().prepareStatement(select);
+
+		ResultSet result=pt.executeQuery();
+		while(result.next()) {
+			Socios socio=new Socios();
+			socio.setNombre(result.getString("nombre"));
+			socio.setApellido(result.getString("apellido"));
+			socio.setDireccion(result.getString("direccion"));
+			socio.setPoblacion(result.getString("poblacion"));
+			socio.setProvincia(result.getString("provincia"));
+			socio.setDni(result.getString("dni"));
+			
+			socioList.add(socio);
+		}
+		return socioList;
 	}
 }
