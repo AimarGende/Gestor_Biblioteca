@@ -3,11 +3,11 @@ package packLibreria;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestorBBDD extends Conector{
 	PreparedStatement pt;
-	Scanner sc=new Scanner(System.in); 
 	public GestorBBDD() {
 	}
 
@@ -28,10 +28,8 @@ public class GestorBBDD extends Conector{
 	
 	}
 	
-	public void modificarLibro(int id) throws SQLException {
+	public void modificarLibro(Libro libro,int id, Scanner sc) throws SQLException {
 		pt=getCon().prepareStatement("UPDATE libros SET titulo=?, autor=?, num_pag=? WHERE id=?");
-		Libro libro=getLibro(id);
-		libro=FormulariosDeDatos.modificarDatosLibro(libro, sc);
 		pt.setString(1,libro.getTitulo());
 		pt.setString(2, libro.getAutor());
 		pt.setInt(3, libro.getNum_pag());
@@ -53,5 +51,24 @@ public class GestorBBDD extends Conector{
 		libro.setNum_pag(result.getInt("num_pag"));
 		
 		return libro;
+	}
+	
+	public ArrayList<Libro> getLibros() throws SQLException{
+		ArrayList<Libro> libroList=new ArrayList<Libro>();
+		String select="SELECT * FROM libros";
+		
+		
+		pt=getCon().prepareStatement(select);
+
+		ResultSet result=pt.executeQuery();
+		while(result.next()) {
+			Libro libro=new Libro();
+			libro.setId(result.getInt("id"));
+			libro.setTitulo(result.getString("titulo"));
+			libro.setAutor(result.getString("autor"));
+			libro.setNum_pag(result.getInt("num_pag"));
+			libroList.add(libro);
+		}
+		return libroList;
 	}
 }
