@@ -149,4 +149,70 @@ public class GestorBBDD extends Conector{
 		}
 		return socioList;
 	}
+	//Para GestorPrestamo--------------------------------------------------------------------------------
+	public void insertarPrestamo(Prestamos prestamo) throws ClassNotFoundException, SQLException {
+		
+		pt = getCon().prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?)");
+		pt.setInt(1, prestamo.getId_libro());
+		pt.setInt(2, prestamo.getId_socio());
+		pt.setDate(3, prestamo.getFecha());
+		pt.setInt(4, prestamo.getDevuelto());
+		pt.execute();
+		System.out.println("Se ha insertado el prestamo");
+	}
+	
+	public void eliminarPrestmao(int id_libro, int id_socio) throws ClassNotFoundException, SQLException {
+		pt = getCon().prepareStatement("DELETE FROM prestamos WHERE id_libro=? AND id_socio=?");
+		pt.setInt(1, id_libro);
+		pt.setInt(2, id_socio);
+		pt.execute();
+		
+		System.out.println("Se ha eliminado el prestamo");
+	
+	}
+	
+	public void modificarPrestamo(Prestamos prestamo, int id_libro, int id_socio, Scanner sc) throws SQLException {
+		pt=getCon().prepareStatement("UPDATE libros SET fecha=? devuelto=? WHERE id_libro=? AND id_socio=?");
+		pt.setDate(1, prestamo.getFecha());
+		pt.setInt(2, prestamo.getDevuelto());
+		pt.setInt(3, id_libro);
+		pt.setInt(4, id_socio);
+		pt.executeUpdate();
+		System.out.println("Se ha actualizado el libro");
+	}
+	
+	public Libro getPrestamo(int id) throws SQLException {
+		String select="SELECT * FROM libros WHERE id=?";
+		Libro libro=new Libro();
+		
+		pt=getCon().prepareStatement(select);
+		pt.setInt(1, id);
+		ResultSet result=pt.executeQuery();
+		result.next();
+		libro.setId(result.getInt("id"));
+		libro.setTitulo(result.getString("titulo"));
+		libro.setAutor(result.getString("autor"));
+		libro.setNum_pag(result.getInt("num_pag"));
+		
+		return libro;
+	}
+	
+	public ArrayList<Libro> getLPrestamos() throws SQLException{
+		ArrayList<Libro> libroList=new ArrayList<Libro>();
+		String select="SELECT * FROM libros";
+		
+		
+		pt=getCon().prepareStatement(select);
+
+		ResultSet result=pt.executeQuery();
+		while(result.next()) {
+			Libro libro=new Libro();
+			libro.setId(result.getInt("id"));
+			libro.setTitulo(result.getString("titulo"));
+			libro.setAutor(result.getString("autor"));
+			libro.setNum_pag(result.getInt("num_pag"));
+			libroList.add(libro);
+		}
+		return libroList;
+	}
 }
