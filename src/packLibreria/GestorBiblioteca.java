@@ -18,6 +18,7 @@ public class GestorBiblioteca {
 					GestorSocios.run(sc);
 					break;
 				case Menu.GESTIONAR_PRESTAMOS:
+					Visor.mostrarMensaje("Modulo no disponible");
 					break;
 				case Menu.SALIR:
 					break;
