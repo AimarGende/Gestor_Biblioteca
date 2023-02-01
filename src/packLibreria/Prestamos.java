@@ -6,9 +6,9 @@ public class Prestamos {
 	public int id_libro;
 	public int id_socio;
 	public Date fecha;
-	public boolean devuelto;
+	public int devuelto;
 	
-	public Prestamos(int id_libro, int id_socio, Date fecha, boolean devuelto) {
+	public Prestamos(int id_libro, int id_socio, Date fecha, int devuelto) {
 		this.id_libro = id_libro;
 		this.id_socio = id_socio;
 		this.fecha = fecha;
@@ -43,11 +43,11 @@ public class Prestamos {
 		this.fecha = fecha;
 	}
 
-	public boolean isDevuelto() {
+	public int getDevuelto() {
 		return devuelto;
 	}
 
-	public void setDevuelto(boolean devuelto) {
+	public void setDevuelto(int devuelto) {
 		this.devuelto = devuelto;
 	}
 	
