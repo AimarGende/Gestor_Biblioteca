@@ -163,8 +163,8 @@ public class GestorBBDD extends Conector{
 	
 	public void eliminarPrestmao(int id_libro, int id_socio) throws ClassNotFoundException, SQLException {
 		pt = getCon().prepareStatement("DELETE FROM prestamos WHERE id_libro=? AND id_socio=?");
-		pt.setInt(1, id_libro);
-		pt.setInt(2, id_socio);
+		pt.setInt(1, id_libro); //Comprobar que exista
+		pt.setInt(2, id_socio); //Comprobar que exista
 		pt.execute();
 		
 		System.out.println("Se ha eliminado el prestamo");
@@ -172,47 +172,50 @@ public class GestorBBDD extends Conector{
 	}
 	
 	public void modificarPrestamo(Prestamos prestamo, int id_libro, int id_socio, Scanner sc) throws SQLException {
-		pt=getCon().prepareStatement("UPDATE libros SET fecha=? devuelto=? WHERE id_libro=? AND id_socio=?");
+		pt=getCon().prepareStatement("UPDATE prestamos SET fecha=? devuelto=? WHERE id_libro=? AND id_socio=?");
 		pt.setDate(1, prestamo.getFecha());
 		pt.setInt(2, prestamo.getDevuelto());
-		pt.setInt(3, id_libro);
-		pt.setInt(4, id_socio);
+		pt.setInt(3, id_libro); //Comprobar que exista
+		pt.setInt(4, id_socio); //Comprobar que exista
 		pt.executeUpdate();
 		System.out.println("Se ha actualizado el libro");
 	}
 	
-	public Libro getPrestamo(int id) throws SQLException {
-		String select="SELECT * FROM libros WHERE id=?";
-		Libro libro=new Libro();
+	public Prestamos getPrestamo(int id_libro, int id_socio) throws SQLException {
+		String select="SELECT * FROM prestamos WHERE id_libro=? AND id_socio=?";
+		Prestamos prestamo=new Prestamos();
 		
 		pt=getCon().prepareStatement(select);
-		pt.setInt(1, id);
+		pt.setInt(1, id_libro);
+		pt.setInt(2, id_socio);
 		ResultSet result=pt.executeQuery();
 		result.next();
-		libro.setId(result.getInt("id"));
-		libro.setTitulo(result.getString("titulo"));
-		libro.setAutor(result.getString("autor"));
-		libro.setNum_pag(result.getInt("num_pag"));
+		prestamo.setId_libro(result.getInt("id_libro"));
+		prestamo.setId_socio(result.getInt("id_socio"));
+		prestamo.setFecha(result.getDate("fecha"));
+		prestamo.setDevuelto(result.getInt("devuelto"));
 		
-		return libro;
+		return prestamo;
 	}
 	
-	public ArrayList<Libro> getLPrestamos() throws SQLException{
-		ArrayList<Libro> libroList=new ArrayList<Libro>();
-		String select="SELECT * FROM libros";
+	public ArrayList<Prestamos> getPrestamos() throws SQLException{
+		ArrayList<Prestamos> prestamosList=new ArrayList<Prestamos>();
+		String select="SELECT * FROM prestamos";
 		
 		
 		pt=getCon().prepareStatement(select);
 
 		ResultSet result=pt.executeQuery();
 		while(result.next()) {
-			Libro libro=new Libro();
-			libro.setId(result.getInt("id"));
-			libro.setTitulo(result.getString("titulo"));
-			libro.setAutor(result.getString("autor"));
-			libro.setNum_pag(result.getInt("num_pag"));
-			libroList.add(libro);
+			Prestamos prestamo= new Prestamos();
+			
+			prestamo.setId_libro(result.getInt("id_libro"));
+			prestamo.setId_socio(result.getInt("id_socio"));
+			prestamo.setFecha(result.getDate("fecha"));
+			prestamo.setDevuelto(result.getInt("devuelto"));
+			
+			prestamosList.add(prestamo);
 		}
-		return libroList;
+		return prestamosList;
 	}
 }
