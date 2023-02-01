@@ -20,8 +20,6 @@ public class GestorBiblioteca {
 				case Menu.GESTIONAR_PRESTAMOS:
 					Visor.mostrarMensaje("Modulo no disponible");
 					break;
-				case Menu.SALIR:
-					break;
 				default:
 					break;
 			}

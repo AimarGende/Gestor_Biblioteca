@@ -45,8 +45,6 @@ public class GestorLibros {
 					Visor.mostrarLibros(gest.getLibros());
 					gest.cerrar();
 					break;
-				case Menu.SALIR:
-					break;
 				default:
 					System.out.println("Opcion equivocada, insertelo otra vez");
 					break;

@@ -46,9 +46,6 @@ public class GestorSocios {
 					Visor.mostrarSocios(gest.getSocios());
 					gest.cerrar();
 					break;
-				case Menu.SALIR:
-					
-					break;
 				default:
 					System.out.println("Opcion equivocada, insertelo otra vez");
 					break;
