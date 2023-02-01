@@ -1,6 +1,6 @@
 package packLibreria;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Prestamos {
 	public int id_libro;
@@ -50,6 +50,8 @@ public class Prestamos {
 	public void setDevuelto(boolean devuelto) {
 		this.devuelto = devuelto;
 	}
+
+
 	
 	
 	
