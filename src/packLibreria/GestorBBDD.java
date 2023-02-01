@@ -156,7 +156,7 @@ public class GestorBBDD extends Conector{
 		pt.setInt(1, prestamo.getId_libro());
 		pt.setInt(2, prestamo.getId_socio());
 		pt.setDate(3, prestamo.getFecha());
-		pt.setInt(4, prestamo.getDevuelto());
+		pt.setInt(4, (prestamo.isDevuelto()== true ? 1:0));
 		pt.execute();
 		System.out.println("Se ha insertado el prestamo");
 	}
@@ -174,7 +174,7 @@ public class GestorBBDD extends Conector{
 	public void modificarPrestamo(Prestamos prestamo, int id_libro, int id_socio, Scanner sc) throws SQLException {
 		pt=getCon().prepareStatement("UPDATE prestamos SET fecha=? devuelto=? WHERE id_libro=? AND id_socio=?");
 		pt.setDate(1, prestamo.getFecha());
-		pt.setInt(2, prestamo.getDevuelto());
+		pt.setInt(2, prestamo.isDevuelto()== true ? 1:0);
 		pt.setInt(3, id_libro); //Comprobar que exista
 		pt.setInt(4, id_socio); //Comprobar que exista
 		pt.executeUpdate();
@@ -193,7 +193,7 @@ public class GestorBBDD extends Conector{
 		prestamo.setId_libro(result.getInt("id_libro"));
 		prestamo.setId_socio(result.getInt("id_socio"));
 		prestamo.setFecha(result.getDate("fecha"));
-		prestamo.setDevuelto(result.getInt("devuelto"));
+		prestamo.setDevuelto(result.getInt("devuelto")== 1 ? true:false);
 		
 		return prestamo;
 	}
@@ -212,7 +212,7 @@ public class GestorBBDD extends Conector{
 			prestamo.setId_libro(result.getInt("id_libro"));
 			prestamo.setId_socio(result.getInt("id_socio"));
 			prestamo.setFecha(result.getDate("fecha"));
-			prestamo.setDevuelto(result.getInt("devuelto"));
+			prestamo.setDevuelto(result.getInt("devuelto")== 1 ? true:false);
 			
 			prestamosList.add(prestamo);
 		}

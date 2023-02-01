@@ -3,7 +3,7 @@ package packLibreria;
 import java.util.Scanner;
 
 public class FormulariosDeDatos {
-	
+//Seccion para libros
 	static Libro pedirDatosLibro(Scanner sc) {
 		Libro libro=new Libro();
 		System.out.println("Insertar datos del libro:");
@@ -36,7 +36,7 @@ public class FormulariosDeDatos {
 		return id;
 	}
 	
-//hacer seccion para socios
+//Seccion para socios
 	
 	static Socios pedirDatosSocio(Scanner sc) {
 		Socios socio=new Socios();
@@ -79,5 +79,12 @@ public class FormulariosDeDatos {
 		System.out.println("Inserte la id del socio");
 		id=Integer.parseInt(sc.nextLine());
 		return id;
+	}
+	
+//Seccion para prestmos
+	
+	static Prestamos pedirDatosPrestamo(Scanner sc) {
+		
+		return null;
 	}
 }
