@@ -46,12 +46,12 @@ public class GestorLibros {
 					gest.cerrar();
 					break;
 				case Menu.SALIR:
-					System.out.println("Saliendo del menu...");
 					break;
 				default:
 					System.out.println("Opcion equivocada, insertelo otra vez");
 					break;
 			}
 		}while(opcion!=Menu.SALIR);
+		System.out.println("Volviendo al menu principal");
 	}
 }

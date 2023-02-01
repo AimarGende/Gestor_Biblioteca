@@ -26,5 +26,6 @@ public class GestorBiblioteca {
 			}
 		}while(opcion!=Menu.SALIR);
 		sc.close();
+		System.out.println("Muchas gracias por usar nuestra app, vuelva pronto");
 	}
 }
