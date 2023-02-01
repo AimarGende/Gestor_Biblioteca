@@ -1,5 +1,8 @@
 package packLibreria;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class FormulariosDeDatos {
@@ -83,8 +86,15 @@ public class FormulariosDeDatos {
 	
 //Seccion para prestmos
 	
-	static Prestamos pedirDatosPrestamo(Scanner sc) {
+	static Prestamos pedirDatosPrestamo(Scanner sc) throws ParseException {
+		Prestamos prestamo= new Prestamos();
+		SimpleDateFormat fecha= new SimpleDateFormat("dd/MM/yyyy");
 		
-		return null;
+		System.out.println("Insertar datos del prestamos:");
+		prestamo.setId_libro(pedirIdLibro(sc));
+		prestamo.setId_socio(pedirIdSocio(sc));
+		System.out.println("Inserta la fecha del prestamo, el formato es dia(dd)/mes(MM)/año(yyyy)");
+		prestamo.setFecha(fecha.parse(sc.nextLine()));
+		return prestamo;
 	}
 }

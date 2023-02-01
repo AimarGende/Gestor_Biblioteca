@@ -1,5 +1,6 @@
 package packLibreria;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -155,7 +156,7 @@ public class GestorBBDD extends Conector{
 		pt = getCon().prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?)");
 		pt.setInt(1, prestamo.getId_libro());
 		pt.setInt(2, prestamo.getId_socio());
-		pt.setDate(3, prestamo.getFecha());
+		pt.setDate(3, (Date) prestamo.getFecha());
 		pt.setInt(4, (prestamo.isDevuelto()== true ? 1:0));
 		pt.execute();
 		System.out.println("Se ha insertado el prestamo");
@@ -173,7 +174,7 @@ public class GestorBBDD extends Conector{
 	
 	public void modificarPrestamo(Prestamos prestamo, int id_libro, int id_socio, Scanner sc) throws SQLException {
 		pt=getCon().prepareStatement("UPDATE prestamos SET fecha=? devuelto=? WHERE id_libro=? AND id_socio=?");
-		pt.setDate(1, prestamo.getFecha());
+		pt.setDate(1, (Date)prestamo.getFecha());
 		pt.setInt(2, prestamo.isDevuelto()== true ? 1:0);
 		pt.setInt(3, id_libro); //Comprobar que exista
 		pt.setInt(4, id_socio); //Comprobar que exista
