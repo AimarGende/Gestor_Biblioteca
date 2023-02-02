@@ -27,5 +27,9 @@ public class Visor {
 		System.out.println(mensaje);
 	}
 	
-	
+	static void mostrarPrestamos(ArrayList<Prestamos> prestamoList) {
+		for (Prestamos prestamo: prestamoList) {
+			System.out.println(prestamo.toString());
+		}
+	}
 }
