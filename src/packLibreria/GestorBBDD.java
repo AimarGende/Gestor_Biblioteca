@@ -31,7 +31,7 @@ public class GestorBBDD extends Conector{
 	
 	}
 	
-	public void modificarLibro(Libro libro,int id, Scanner sc) throws SQLException {
+	public void modificarLibro(Libro libro,int id) throws SQLException {
 		pt=getCon().prepareStatement("UPDATE libros SET titulo=?, autor=?, num_pag=? WHERE id=?");
 		pt.setString(1,libro.getTitulo());
 		pt.setString(2, libro.getAutor());
@@ -96,7 +96,7 @@ public class GestorBBDD extends Conector{
 		System.out.println("Se ha eliminado el socio");
 	}
 	
-	public void modificarSocio(Socios socio,int id, Scanner sc) throws SQLException {
+	public void modificarSocio(Socios socio,int id) throws SQLException {
 		pt=getCon().prepareStatement("UPDATE socios SET nombre=?, apellido=?, direccion=?, poblacion=?, provincia=?, dni=? WHERE id=?");
 		pt.setString(1, socio.getNombre());
 		pt.setString(2, socio.getApellido());
@@ -162,24 +162,73 @@ public class GestorBBDD extends Conector{
 		System.out.println("Se ha insertado el prestamo");
 	}
 	
-	public void eliminarPrestmao(int id_libro, int id_socio) throws ClassNotFoundException, SQLException {
-		pt = getCon().prepareStatement("DELETE FROM prestamos WHERE id_libro=? AND id_socio=?");
-		pt.setInt(1, id_libro); //Comprobar que exista
-		pt.setInt(2, id_socio); //Comprobar que exista
-		pt.execute();
-		
-		System.out.println("Se ha eliminado el prestamo");
+
 	
+	public void devolverLibro(int id_libro) throws SQLException {
+		pt=getCon().prepareStatement("UPDATE prestamos SET devuelto=? WHERE id_libro=? AND devuleto=?");
+		pt.setInt(1, 1);
+		pt.setInt(2, id_libro); 
+		pt.setInt(3, 0);
+		pt.executeUpdate();
+		System.out.println("Se ha devuelto el libro");
 	}
 	
-	public void modificarPrestamo(Prestamos prestamo, int id_libro, int id_socio, Scanner sc) throws SQLException {
-		pt=getCon().prepareStatement("UPDATE prestamos SET fecha=? devuelto=? WHERE id_libro=? AND id_socio=?");
-		pt.setDate(1, (Date)prestamo.getFecha());
-		pt.setInt(2, prestamo.isDevuelto()== true ? 1:0);
-		pt.setInt(3, id_libro); //Comprobar que exista
-		pt.setInt(4, id_socio); //Comprobar que exista
-		pt.executeUpdate();
-		System.out.println("Se ha actualizado el libro");
+	public ArrayList<Prestamos> consultarPrestamoNoDevueltos() throws SQLException {
+		ArrayList<Prestamos> prestamos= new ArrayList<Prestamos>();
+		String sentencia="SELECT * prestamos WHERE devuelto=0";
+		pt=getCon().prepareStatement(sentencia);
+		
+		ResultSet result=pt.executeQuery();
+		
+		while(result.next()) {
+			Prestamos prestamo=new Prestamos();
+			
+			prestamo.setId_libro(result.getInt("id_libro"));
+			prestamo.setId_socio(result.getInt("id_socio"));
+			prestamo.setFecha(result.getDate("fecha"));
+			prestamo.setDevuelto(result.getInt("devuelto")== 1 ? true:false);
+			
+			prestamos.add(prestamo);
+		}
+		return prestamos;
+	}
+	public ArrayList<Prestamos> consultarPrestamoSocio(int id_socio) throws SQLException {
+		ArrayList<Prestamos> prestamos= new ArrayList<Prestamos>();
+		String sentencia="SELECT * prestamos WHERE id_socio=?";
+		pt=getCon().prepareStatement(sentencia);
+		pt.setInt(1, id_socio);
+		
+		ResultSet result=pt.executeQuery();
+		
+		while(result.next()) {
+			Prestamos prestamo=new Prestamos();
+			
+			prestamo.setId_libro(result.getInt("id_libro"));
+			prestamo.setId_socio(result.getInt("id_socio"));
+			prestamo.setFecha(result.getDate("fecha"));
+			prestamo.setDevuelto(result.getInt("devuelto")== 1 ? true:false);
+			
+			prestamos.add(prestamo);
+		}
+		return prestamos;
+	}
+	
+	public boolean consultarDisponibilidadDeLibro(int id_libro) throws SQLException {
+		ArrayList<Prestamos> prestamos= new ArrayList<Prestamos>();
+		String sentencia="SELECT * prestamos WHERE id_libro=?";
+		boolean encontrado=false;
+		
+		pt=getCon().prepareStatement(sentencia);
+		pt.setInt(1, id_libro);
+		
+		ResultSet result=pt.executeQuery();
+		
+		while(result.next() && !encontrado) {
+			if(result.getInt("id_libro")==id_libro) {
+				encontrado=true;
+			}
+		}
+		return encontrado;
 	}
 	
 	public Prestamos getPrestamo(int id_libro, int id_socio) throws SQLException {
