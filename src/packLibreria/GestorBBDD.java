@@ -156,7 +156,7 @@ public class GestorBBDD extends Conector{
 		pt = getCon().prepareStatement("INSERT INTO prestamos VALUES (?,?,?,?)");
 		pt.setInt(1, prestamo.getId_libro());
 		pt.setInt(2, prestamo.getId_socio());
-		pt.setDate(3, (Date) prestamo.getFecha());
+		pt.setDate(3, new Date(prestamo.getFecha().getTime()));
 		pt.setInt(4, (prestamo.isDevuelto()== true ? 1:0));
 		pt.execute();
 		System.out.println("Se ha insertado el prestamo");
@@ -165,19 +165,19 @@ public class GestorBBDD extends Conector{
 
 	
 	public void devolverLibro(int id_libro) throws SQLException {
-		pt=getCon().prepareStatement("UPDATE prestamos SET devuelto=? WHERE id_libro=? AND devuleto=?");
+		pt=getCon().prepareStatement("UPDATE prestamos SET devuelto=? WHERE id_libro=? ");
 		pt.setInt(1, 1);
 		pt.setInt(2, id_libro); 
-		pt.setInt(3, 0);
+	
 		pt.executeUpdate();
 		System.out.println("Se ha devuelto el libro");
 	}
 	
 	public ArrayList<Prestamos> consultarLibrosNoDevueltos() throws SQLException {
 		ArrayList<Prestamos> prestamos= new ArrayList<Prestamos>();
-		String sentencia="SELECT * prestamos WHERE devuelto=0";
+		String sentencia="SELECT * FROM prestamos WHERE devuelto = ?";
 		pt=getCon().prepareStatement(sentencia);
-		
+		pt.setInt(1, 0);
 		ResultSet result=pt.executeQuery();
 		
 		while(result.next()) {
@@ -194,7 +194,7 @@ public class GestorBBDD extends Conector{
 	}
 	public ArrayList<Prestamos> consultarPrestamoSocio(int id_socio) throws SQLException {
 		ArrayList<Prestamos> prestamos= new ArrayList<Prestamos>();
-		String sentencia="SELECT * prestamos WHERE id_socio=?";
+		String sentencia="SELECT * FROM prestamos WHERE id_socio=?";
 		pt=getCon().prepareStatement(sentencia);
 		pt.setInt(1, id_socio);
 		
@@ -214,7 +214,7 @@ public class GestorBBDD extends Conector{
 	}
 	
 	public boolean consultarDisponibilidadDeLibro(int id_libro) throws SQLException {
-		String sentencia="SELECT * prestamos WHERE id_libro=?";
+		String sentencia="SELECT * FROM prestamos WHERE id_libro=?";
 		boolean encontrado=false;
 		boolean disponible=false;
 		

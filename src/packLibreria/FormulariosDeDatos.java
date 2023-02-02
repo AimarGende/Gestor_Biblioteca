@@ -96,7 +96,7 @@ public class FormulariosDeDatos {
 		System.out.println("Inserta la fecha del prestamo, el formato es dia(dd)/mes(MM)/año(yyyy)");
 		prestamo.setFecha(fecha.parse(sc.nextLine()));
 		System.out.println("Inserta si se ha devuelto el prestamo, pon 1 si se ha devuelto y 0 si no:");
-		prestamo.setDevuelto(sc.nextLine()== "1" ? true:false);
+		prestamo.setDevuelto(Integer.parseInt(sc.nextLine())==1 ? true:false);
 		return prestamo;
 	}
 	

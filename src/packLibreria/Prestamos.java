@@ -39,8 +39,8 @@ public class Prestamos {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFecha(Date date) {
+		this.fecha = date;
 	}
 
 	public boolean isDevuelto() {
