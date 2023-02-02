@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class GestorBBDD extends Conector{
 	PreparedStatement pt;
@@ -173,7 +173,7 @@ public class GestorBBDD extends Conector{
 		System.out.println("Se ha devuelto el libro");
 	}
 	
-	public ArrayList<Prestamos> consultarPrestamoNoDevueltos() throws SQLException {
+	public ArrayList<Prestamos> consultarLibrosNoDevueltos() throws SQLException {
 		ArrayList<Prestamos> prestamos= new ArrayList<Prestamos>();
 		String sentencia="SELECT * prestamos WHERE devuelto=0";
 		pt=getCon().prepareStatement(sentencia);
@@ -216,6 +216,7 @@ public class GestorBBDD extends Conector{
 	public boolean consultarDisponibilidadDeLibro(int id_libro) throws SQLException {
 		String sentencia="SELECT * prestamos WHERE id_libro=?";
 		boolean encontrado=false;
+		boolean disponible=false;
 		
 		pt=getCon().prepareStatement(sentencia);
 		pt.setInt(1, id_libro);
@@ -225,9 +226,12 @@ public class GestorBBDD extends Conector{
 		while(result.next() && !encontrado) {
 			if(result.getInt("id_libro")==id_libro) {
 				encontrado=true;
+				if(result.getInt("devuelto")==1){
+					disponible=true;
+				}
 			}
 		}
-		return encontrado;
+		return disponible;
 	}
 	
 	public Prestamos getPrestamo(int id_libro, int id_socio) throws SQLException {
