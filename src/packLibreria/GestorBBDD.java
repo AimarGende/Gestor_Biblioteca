@@ -214,7 +214,6 @@ public class GestorBBDD extends Conector{
 	}
 	
 	public boolean consultarDisponibilidadDeLibro(int id_libro) throws SQLException {
-		ArrayList<Prestamos> prestamos= new ArrayList<Prestamos>();
 		String sentencia="SELECT * prestamos WHERE id_libro=?";
 		boolean encontrado=false;
 		
