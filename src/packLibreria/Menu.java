@@ -17,6 +17,10 @@ public class Menu {
 	
 	
 	final static int REALIZAR_PRESTAMO=1;
+	final static int DEVOLVER_LIBRO=2;
+	final static int CONSULTAR_PRESTAMO_SOCIO=3;
+	final static int CONSULTAR_DISPONIBILIDAD_LIBRO=4;
+	final static int CONSULTAR_LIBROS_NO_DEVUELTOS=5;
 	
 	final static int SALIR=0;
 	
@@ -52,6 +56,11 @@ public class Menu {
 	static void mostrarMenuPrestamos() {
 		System.out.println("--MENU PRESTAMOS--");
 		System.out.println( REALIZAR_PRESTAMO+". Realizar préstamo");
-
+		System.out.println(DEVOLVER_LIBRO+". Devolver libro");
+		System.out.println(CONSULTAR_PRESTAMO_SOCIO+". Consultar prestamo de socio");
+		System.out.println(CONSULTAR_DISPONIBILIDAD_LIBRO+". Consultar disponibilidad de  libro");
+		System.out.println(CONSULTAR_LIBROS_NO_DEVUELTOS+". Consultar libros no devueltos");
+		System.out.println(SALIR+". Salir");
+		System.out.println("Escoja una opcion:");
 	}
 }
