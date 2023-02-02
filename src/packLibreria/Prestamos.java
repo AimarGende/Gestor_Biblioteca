@@ -51,6 +51,12 @@ public class Prestamos {
 		this.devuelto = devuelto;
 	}
 
+	@Override
+	public String toString() {
+		return "id_libro=" + id_libro + ", id_socio=" + id_socio + ", fecha=" + fecha + ", devuelto="
+				+ devuelto;
+	}
+
 
 	
 	
