@@ -37,7 +37,7 @@ public class GestorSocios {
 					gest.conectar();
 					socio=gest.getSocio(id);
 					socio=FormulariosDeDatos.modificarDatosSocio(socio, sc);
-					gest.modificarSocio(socio, id, sc);
+					gest.modificarSocio(socio, id);
 					gest.cerrar();
 					break;
 				case Menu.VER_LIBROS:

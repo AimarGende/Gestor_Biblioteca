@@ -36,7 +36,7 @@ public class GestorLibros {
 					gest.conectar();
 					libro=gest.getLibro(id);
 					libro=FormulariosDeDatos.modificarDatosLibro(libro, sc);
-					gest.modificarLibro(libro, id,sc);
+					gest.modificarLibro(libro, id);
 					gest.cerrar();
 					break;
 				case Menu.VER_LIBROS:
