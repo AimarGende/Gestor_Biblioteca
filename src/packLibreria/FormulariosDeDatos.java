@@ -95,6 +95,21 @@ public class FormulariosDeDatos {
 		prestamo.setId_socio(pedirIdSocio(sc));
 		System.out.println("Inserta la fecha del prestamo, el formato es dia(dd)/mes(MM)/año(yyyy)");
 		prestamo.setFecha(fecha.parse(sc.nextLine()));
+		System.out.println("Inserta si se ha devuelto el prestamo, pon 1 si se ha devuelto y 0 si no:");
+		prestamo.setDevuelto(sc.nextLine()== "1" ? true:false);
+		return prestamo;
+	}
+	
+	static Prestamos modificarPrestamo(Prestamos prestamo,Scanner sc) throws ParseException {
+		SimpleDateFormat fecha= new SimpleDateFormat("dd/MM/yyyy");
+		
+		System.out.println("Insertar datos del prestamos:");
+		prestamo.setId_libro(pedirIdLibro(sc));
+		prestamo.setId_socio(pedirIdSocio(sc));
+		System.out.println("Inserta la fecha del prestamo, el formato es dia(dd)/mes(MM)/año(yyyy)");
+		prestamo.setFecha(fecha.parse(sc.nextLine()));
+		System.out.println("Inserta si se ha devuelto el prestamo, pon 1 si se ha devuelto y 0 si no:");
+		prestamo.setDevuelto(sc.nextLine()== "1" ? true:false);
 		return prestamo;
 	}
 }
