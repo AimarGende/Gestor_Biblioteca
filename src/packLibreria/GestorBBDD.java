@@ -165,9 +165,10 @@ public class GestorBBDD extends Conector{
 
 	
 	public void devolverLibro(int id_libro) throws SQLException {
-		pt=getCon().prepareStatement("UPDATE prestamos SET devuelto=? WHERE id_libro=? ");
+		pt=getCon().prepareStatement("UPDATE prestamos SET devuelto=? WHERE id_libro=? AND devuelto=? ");
 		pt.setInt(1, 1);
 		pt.setInt(2, id_libro); 
+		pt.setInt(3,0);
 	
 		pt.executeUpdate();
 		System.out.println("Se ha devuelto el libro");
